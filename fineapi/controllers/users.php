@@ -2,7 +2,7 @@
 
 class Users
 {
-    function get($id) {
+    function show($id) {
         var_dump(get_user_by('id', $id));
     }
 }

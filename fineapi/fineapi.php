@@ -44,8 +44,11 @@ class Fine_API
                     $input = json_decode(file_get_contents('php://input'), true);
                     break;
                 case 'GET' :
-                    $action = 'get';
                     $input = get_query_var('id');
+                    if(isset($input) && $input != '')
+                        $action = 'show'
+                    else
+                        $action = 'index'
                     break;
                 case 'DELETE' :
                     $action = 'delete';

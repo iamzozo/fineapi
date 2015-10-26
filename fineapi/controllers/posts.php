@@ -2,29 +2,22 @@
 
 class Posts
 {
-    function get($id = null)
+    function index()
     {
         global $fineapi;
-
-        $args = array(
+        $posts = new WP_Query(array(
             'post_type' => 'post'
-        );
+        ));
+        $fineapi->response($posts);
+    }
 
-        if ($id) $args['p'] = $id;
+    function show($id)
+    {
+        $posts = new WP_Query(array(
+            'post_type' => 'post',
+            'p'  => $id
+        ));
 
-        $posts = new WP_Query($args);
-
-        foreach ($posts->posts as $post) {
-            $out[] = array(
-                'id' => $post->ID,
-                'title' => $post->post_title
-            );
-        }
-
-        if ($id)
-            $out = array_shift($out);
-
-        $fineapi->response($out);
-
+        $fineapi->response($posts);
     }
 }
