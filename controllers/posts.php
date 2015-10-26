@@ -13,11 +13,12 @@ class Posts
 
     function show($id)
     {
+        global $fineapi;
         $posts = new WP_Query(array(
             'post_type' => 'post',
             'p'  => $id
         ));
 
-        $fineapi->response($posts);
+        $fineapi->response($posts, true);
     }
 }

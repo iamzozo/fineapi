@@ -46,9 +46,9 @@ class Fine_API
                 case 'GET' :
                     $input = get_query_var('id');
                     if(isset($input) && $input != '')
-                        $action = 'show'
+                        $action = 'show';
                     else
-                        $action = 'index'
+                        $action = 'index';
                     break;
                 case 'DELETE' :
                     $action = 'delete';
@@ -78,10 +78,24 @@ class Fine_API
         }
     }
 
-    function response($array)
+    function response($array, $one = false)
     {
         header('Content-type: application/json');
-        echo json_encode($array);
+        if(isset($array->posts)) {
+            if($one)
+                echo json_encode(array_shift($array->posts));
+            else
+                echo json_encode($array->posts);
+
+        }
+        else {
+            if($one)
+                echo json_encode(array_shift($array));
+            else
+                echo json_encode($array);
+        }
+        exit;
+
     }
 }
 
