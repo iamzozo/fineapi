@@ -16,6 +16,7 @@ class Fine_API
             add_rewrite_rule('^api/([^/]*)/?([^/]*)', 'index.php?controller=$matches[1]&id=$matches[2]', 'top');
             add_rewrite_tag('%controller%', '([^/]*)');
             add_rewrite_tag('%id%', '([^/]*)');
+            require_once __DIR__ . '/finehelper.php';
         });
 
         add_action('template_redirect', array(&$this, 'handle_request'));
@@ -95,7 +96,11 @@ class Fine_API
                 echo json_encode($array);
         }
         exit;
+    }
 
+    function upload()
+    {
+        $finehelper->upload();
     }
 }
 

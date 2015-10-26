@@ -3,6 +3,7 @@
 class Users
 {
     function show($id) {
-        var_dump(get_user_by('id', $id));
+        global $fineapi;
+        $fineapi->response(get_user_by('id', $id));
     }
 }
