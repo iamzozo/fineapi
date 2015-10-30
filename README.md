@@ -26,15 +26,17 @@ Five methods available in the controller, what gets called:
 3. In your posts controller
 
 ```
-global $fineapi;
-$id = wp_insert_post([
-    'post_title' => 'Testing',
-    'post_content' => 'A test content',
-]);
-foreach($_FILES as $file) {
-    $fineapi->upload($file, [
-        'post_parent' => $id
+function store() {
+    global $fineapi;
+    $id = wp_insert_post([
+        'post_title' => 'Testing',
+        'post_content' => 'Hello world!',
     ]);
+    foreach($_FILES as $file) {
+        $fineapi->upload($file, [
+            'post_parent' => $id
+        ]);
+    }
 }
 ```
 
