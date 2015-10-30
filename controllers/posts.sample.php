@@ -4,7 +4,6 @@ class Posts
 {
     function index()
     {
-        global $fineapi;
         $posts = new WP_Query(array(
             'post_type' => 'post'
         ));
@@ -20,5 +19,18 @@ class Posts
         ));
 
         $fineapi->response($posts, true);
+    }
+
+    function store() {
+        global $fineapi;
+        $id = wp_insert_post([
+            'post_title' => 'Tesztelek',
+            'post_content' => 'Tesztelek',
+        ]);
+        foreach($_FILES as $file) {
+            $fineapi->upload($file, [
+                'post_parent' => $id
+            ]);
+        }
     }
 }
